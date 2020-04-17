@@ -3,6 +3,8 @@ const mongoose = require("mongoose");
 
 const router = express.Router();
 const body = require('body-parser');
+var MQTT_client = require('../mqtt');
+
 const DeviceModel = require('../model/device');
 var moment = require("moment");
 
@@ -46,6 +48,7 @@ router.post('/', (req, res, next) => {
             const update = { $set: { status: req.body.status, lastPowerOn: lastPowerOn } };
 
             DeviceModel.findOneAndUpdate(filter, update, { new: true, useFindAndModify: false }).then(doc => {
+                MQTT_client.mqtt_publish(doc.room,doc.device, "1");
                 res.status(200).json({ status: true, doc: doc });
             }).catch(err => {
                 res.status(404).json({ status: false, message: err });
@@ -67,6 +70,7 @@ router.post('/', (req, res, next) => {
                 const update = { $set: { status: req.body.status, lastPowerOff: lastPowerOff, powerConsumption: powerConsumption } };
 
                 DeviceModel.findOneAndUpdate(filter, update, { new: true, useFindAndModify: false }).then(doc => {
+                    MQTT_client.mqtt_publish(doc.room,doc.device, "0");
                     res.status(200).json({ status: true, doc: doc });
                 }).catch(err => {
                     res.status(404).json({ status: false, message: err });
@@ -88,6 +92,7 @@ router.post('/', (req, res, next) => {
                     console.log(doc);
                     
                     DeviceModel.findOneAndUpdate(filter, update, { new: true, useFindAndModify: false }).then(doc => {
+                        MQTT_client.mqtt_publish(doc.room,doc.device, "1");
                         res.status(200).json({ status: true, doc: doc });
                     }).catch(err => {
                         res.status(404).json({ status: false, message: err });

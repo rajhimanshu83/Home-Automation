@@ -14,12 +14,28 @@ var getRouter = require('./routes/get');
 var OperateRouter = require('./routes/operate'); 
 var DeleteRouter=require('./routes/delete');
 var SearchRouter=require('./routes/search');
+const mqtt = require ('mqtt');
+// var MQTT_client = require('./mqtt');
 
 
 
 mongoose.connect('mongodb://localhost:27017/HomeAutomation', { useNewUrlParser: true });
+var client  = mqtt.connect('mqtt://test.mosquitto.org')
+ 
+client.on('connect', function () {
+  client.subscribe('presence', function (err) {
+    if (!err) {
+      client.publish('presence', 'Hello mqtt')
+    }
+  })
+})
+ 
+client.on('message', function (topic, message) {
+  // message is Buffer
+  console.log(message.toString(),topic)
+  // client.end()
+})// parse application/x-www-form-urlencoded
 
-// parse application/x-www-form-urlencoded
 
 var app = express();
 app.use(cors());
