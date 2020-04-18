@@ -23,9 +23,9 @@ mongoose.connect('mongodb://localhost:27017/HomeAutomation', { useNewUrlParser: 
 var client  = mqtt.connect('mqtt://test.mosquitto.org')
  
 client.on('connect', function () {
-  client.subscribe(['presence','home/Bedroom/TV'], function (err) {
+  client.subscribe(['testConnection','home/Bedroom/TV'], function (err) {
     if (!err) {
-      client.publish('presence', 'Hello mqtt')
+      client.publish('testConnection', 'MQTT is Working Fine')
     }
   })
 })

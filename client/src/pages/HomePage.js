@@ -10,12 +10,15 @@ const HomePage = () => {
     const [deviceId, setdeviceId] = useState("");
     const { addToast } = useToasts();
 
-    useEffect(async() => {
-        const Response = await fetch('/api/get',{
-            method: 'GET'
-        });
-        const Data = await Response.json();
-        setDevices(Data.doc);
+    useEffect(() => {
+        const fetchData = async () => {
+            const Response = await fetch('/api/get',{
+                method: 'GET'
+            });
+            const Data = await Response.json();
+            setDevices(Data.doc);
+          };
+          fetchData();
   }, []);
 
   const handleChange = (e)=> {
@@ -70,17 +73,17 @@ const toggleChecked = async(id,sts,name)=> {
     return (
         <>
          <TopNavbar/>
-         <div class="cardresult" id="results" style={{paddingTop:"30px"}}>
-        <ul class="header">
+         <div className="cardresult" id="results" style={{paddingTop:"30px"}}>
+        <ul className="header">
             <li>
                 <h3>Name</h3>
-                <dl class="dates">
+                <dl className="dates">
                     <dt>Last Power On</dt>
                     <dd></dd>
                     <dt>Last Power OFF</dt>
                     <dd></dd>
                 </dl>
-                <dl class="info">
+                <dl className="info">
                     <dt>Status</dt>
                     <dd></dd>
                     <dt>Consumption</dt>
@@ -91,17 +94,17 @@ const toggleChecked = async(id,sts,name)=> {
         </ul>
         <ul>
             {devices.length && devices.map(device=>(
-                             <li>
+                             <li key={device._id}>
                              <Button color="danger" onClick={()=>{RemoveDevice(device._id);}} style={{marginLeft:"82%",marginBottom:"5px"}}>Remove</Button>
                              <h3 style={{fontSize:"25px"}}>{device.device}</h3>
 
-                             <dl class="dates">
+                             <dl className="dates">
                                  <dt>Last Power On</dt>
             <dd>{moment(new Date(device.lastPowerOn)).format('DD-MM-YYYY HH:mm')}</dd>
                                  <dt>Last Power OFF</dt>
                                  <dd>{moment(new Date(device.lastPowerOff)).format('DD-MM-YYYY HH:mm')}</dd>
                              </dl>
-                             <dl class="info">
+                             <dl className="info">
                                  <dt>Status</dt>
                                  <dd>
         {deviceId === device._id && <div className="loader" id="loader-4">
@@ -126,7 +129,7 @@ const toggleChecked = async(id,sts,name)=> {
                 <label></label>
             </div>}
                                  </dd>
-                                 <dt>Consumption</dt>
+                                 <dt>Usage</dt>
             <dd>{Math.floor(device.powerConsumption)} watt</dd>
                                  <dt>Room</dt>
             <dd>{device.room}</dd>

@@ -8,13 +8,11 @@ import * as serviceWorker from './serviceWorker';
 import { ToastProvider } from 'react-toast-notifications'
 
 ReactDOM.render(
-  <React.StrictMode>
     <Router>
     <ToastProvider>
     <App />
     </ToastProvider>
-    </Router>
-  </React.StrictMode>,
+    </Router>,
   document.getElementById('root')
 );
 

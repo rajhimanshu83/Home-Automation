@@ -3,7 +3,9 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "server": "node ./bin/www",
+    "client": "cd client && npm start",
+    "start": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\""
   },
   "dependencies": {
     "body-parser": "^1.19.0",
@@ -18,5 +20,8 @@
     "morgan": "~1.9.1",
     "mosca": "^2.8.3",
     "mqtt": "^3.0.0"
+  },
+  "devDependencies": {
+    "concurrently": "^5.1.0"
   }
 }
