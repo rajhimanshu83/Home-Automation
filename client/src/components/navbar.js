@@ -16,12 +16,12 @@ const TopNavbar = () => {
   return (
     <div>
       <Navbar color="light" light expand="md">
-        <NavbarBrand href="/" style={{marginRight:"50px",fontSize:"2em"}}>Home Automation</NavbarBrand>
+        <NavbarBrand href="/" style={{marginRight:"50px",fontSize:"2em"}}>&#9651; Home Automation</NavbarBrand>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
           <Nav className="mr-auto" navbar>
             <NavItem>
-              <NavLink href="/add/device">Add a device</NavLink>
+              <NavLink href="/add/device">&#x2b; Add a device</NavLink>
             </NavItem>
           </Nav>
         </Collapse>

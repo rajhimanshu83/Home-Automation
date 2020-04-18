@@ -73,6 +73,7 @@ const toggleChecked = async(id,sts,name)=> {
     return (
         <>
          <TopNavbar/>
+         <div className="devicesList">
          <div className="cardresult" id="results" style={{paddingTop:"30px"}}>
         <ul className="header">
             <li>
@@ -95,7 +96,7 @@ const toggleChecked = async(id,sts,name)=> {
         <ul>
             {devices.length && devices.map(device=>(
                              <li key={device._id}>
-                             <Button color="danger" onClick={()=>{RemoveDevice(device._id);}} style={{marginLeft:"82%",marginBottom:"5px"}}>Remove</Button>
+                             <Button color="danger" onClick={()=>{RemoveDevice(device._id);}} style={{marginLeft:"75%",marginBottom:"5px"}}>Remove</Button>
                              <h3 style={{fontSize:"25px"}}>{device.device}</h3>
 
                              <dl className="dates">
@@ -137,6 +138,7 @@ const toggleChecked = async(id,sts,name)=> {
                          </li>
              ))}
         </ul>
+    </div>
     </div>
         </>
     )
