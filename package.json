@@ -7,7 +7,9 @@
     "client-install":"npm install --prefix client",
     "client": "npm start --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "heroku-postbuild":"NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
+    "start": "node ./bin/www ",
+    "heroku-postbuild":"cd client && npm install --only=dev && npm install && npm run build"
+
   },
   "dependencies": {
     "body-parser": "^1.19.0",
