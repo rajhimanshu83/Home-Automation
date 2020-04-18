@@ -1,13 +1,10 @@
 const express = require('express');
-const mongoose = require("mongoose");
 
 const router = express.Router();
-const body = require('body-parser');
 var MQTT_client = require('../mqtt');
 
 const DeviceModel = require('../model/device');
 var moment = require("moment");
-
 
 function findDuplicate(device, room,watt) {
 

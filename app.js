@@ -23,7 +23,7 @@ mongoose.connect('mongodb://localhost:27017/HomeAutomation', { useNewUrlParser: 
 var client  = mqtt.connect('mqtt://test.mosquitto.org')
  
 client.on('connect', function () {
-  client.subscribe('presence', function (err) {
+  client.subscribe(['presence','home/Bedroom/TV'], function (err) {
     if (!err) {
       client.publish('presence', 'Hello mqtt')
     }
@@ -55,12 +55,12 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
-app.use('/add', addRouter);
-app.use('/get', getRouter);
-app.use('/operate', OperateRouter);
-app.use('/delete', DeleteRouter);
-app.use('/search', SearchRouter);
+app.use('/api/users', usersRouter);
+app.use('/api/add', addRouter);
+app.use('/api/get', getRouter);
+app.use('/api/operate', OperateRouter);
+app.use('/api/delete', DeleteRouter);
+app.use('/api/search', SearchRouter);
 
 
 // catch 404 and forward to error handler
